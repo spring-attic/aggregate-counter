@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>aggregate-counter-app-starters-build</artifactId>
+	<artifactId>field-value-counter-app-starters-build</artifactId>
 	<packaging>pom</packaging>
 
 	<parent>
@@ -12,16 +12,16 @@
 	</parent>
 
 	<modules>
-		<module>spring-cloud-starter-stream-sink-aggregate-counter</module>
-		<module>aggregate-counter-app-dependencies</module>
-		<module>aggregate-counter-app-starters-test-support</module>
+		<module>spring-cloud-starter-stream-sink-field-value-counter</module>
+		<module>field-value-counter-app-dependencies</module>
+		<module>field-value-counter-app-starters-test-support</module>
 	</modules>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud.stream.app</groupId>
-				<artifactId>aggregate-counter-app-dependencies</artifactId>
+				<artifactId>field-value-counter-app-dependencies</artifactId>
 				<version>1.1.0.BUILD-SNAPSHOT</version>
 				<type>pom</type>
 				<scope>import</scope>
