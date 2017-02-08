@@ -9,10 +9,10 @@
     <description>Spring Cloud Stream Aggregate Counter App Dependencies</description>
 
     <parent>
-	<artifactId>spring-cloud-dependencies-parent</artifactId>
-	<groupId>org.springframework.cloud</groupId>
-	<version>1.2.1.RELEASE</version>
-	<relativePath />
+		<artifactId>spring-cloud-dependencies-parent</artifactId>
+		<groupId>org.springframework.cloud</groupId>
+		<version>1.2.1.RELEASE</version>
+		<relativePath />
     </parent>
 
     <properties>
@@ -35,11 +35,17 @@
                 <groupId>org.springframework.analytics</groupId>
                 <artifactId>spring-analytics</artifactId>
                 <version>${spring-analytics.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-core</artifactId>
+					</exclusion>
+				</exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
-<profiles>
+	<profiles>
 		<profile>
 			<id>spring</id>
 			<repositories>
@@ -104,7 +110,5 @@
 			</pluginRepositories>
 		</profile>
 	</profiles>
-
-
 
 </project>
