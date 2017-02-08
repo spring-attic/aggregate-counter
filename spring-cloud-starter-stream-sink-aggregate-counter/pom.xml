@@ -13,12 +13,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-stream-test-support-internal</artifactId>
-			<version>1.0.2.RELEASE</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.analytics</groupId>
 			<artifactId>spring-analytics</artifactId>
 		</dependency>
@@ -29,6 +23,11 @@
 		<dependency>
 			<groupId>org.springframework.cloud.stream.app</groupId>
 			<artifactId>app-starters-time-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud.stream.app</groupId>
+			<artifactId>app-starters-test-support</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
