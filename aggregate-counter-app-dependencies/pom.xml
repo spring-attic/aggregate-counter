@@ -16,7 +16,7 @@
     </parent>
 
     <properties>
-        <spring-analytics.version>1.0.0.RELEASE</spring-analytics.version>
+        <spring-analytics.version>1.1.1.RELEASE</spring-analytics.version>
     </properties>
 
     <dependencyManagement>

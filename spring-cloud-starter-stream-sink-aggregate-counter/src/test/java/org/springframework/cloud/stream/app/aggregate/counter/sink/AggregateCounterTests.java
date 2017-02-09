@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2016 the original author or authors.
+ * Copyright 2014-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,10 @@
 
 package org.springframework.cloud.stream.app.aggregate.counter.sink;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
+import static org.junit.Assert.assertThat;
+
 import java.util.Collections;
 
 import org.joda.time.DateTime;
@@ -30,15 +34,11 @@ import org.springframework.analytics.metrics.AggregateCounterRepository;
 import org.springframework.analytics.metrics.AggregateCounterResolution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.stream.annotation.Bindings;
 import org.springframework.cloud.stream.app.test.redis.RedisTestSupport;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.messaging.support.GenericMessage;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItems;
-import static org.junit.Assert.assertThat;
 
 
 /**
@@ -48,7 +48,8 @@ import static org.junit.Assert.assertThat;
  * @author Ilayaperumal Gopinathan
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest({"server.port=-1", "classes:TestAggregateCounterSinkApplication.class"})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE,
+		properties = "classes:TestAggregateCounterSinkApplication.class")
 public abstract class AggregateCounterTests {
 
 	@Rule
@@ -72,7 +73,7 @@ public abstract class AggregateCounterTests {
 	}
 
 
-	@SpringBootTest("aggregate-counter.name="+ AGGREGATE_COUNTER_NAME)
+	@TestPropertySource(properties = "aggregate-counter.name=" + AGGREGATE_COUNTER_NAME)
 	public static class NullTimefieldAggregateCounterTests extends AggregateCounterTests {
 
 		@Test
@@ -80,12 +81,16 @@ public abstract class AggregateCounterTests {
 			this.sink.input().send(new GenericMessage<Object>(""));
 			AggregateCounter counts = this.aggregateCounterRepository.getCounts(AGGREGATE_COUNTER_NAME, 5,
 					AggregateCounterResolution.hour);
-			assertThat(counts.getCounts(), equalTo(new long[] {0, 0, 0, 0, 1}));
+			assertThat(counts.getCounts(), equalTo(new long[] { 0, 0, 0, 0, 1 }));
 			aggregateCounterRepository.reset(AGGREGATE_COUNTER_NAME);
 		}
+
 	}
 
-	@SpringBootTest({"aggregate-counter.name="+ AGGREGATE_COUNTER_NAME, "aggregate-counter.timeField=payload.ts", "aggregate-counter.dateFormat=dd/MM/yyyy"})
+	@TestPropertySource(properties = {
+			"aggregate-counter.name=" + AGGREGATE_COUNTER_NAME,
+			"aggregate-counter.timeField=payload.ts",
+			"aggregate-counter.dateFormat=dd/MM/yyyy" })
 	public static class CountWithTimestampInMessageAndCustomFormatTests extends AggregateCounterTests {
 
 		@Test
@@ -94,11 +99,14 @@ public abstract class AggregateCounterTests {
 			DateTime endDate = new DateTime(1980, 1, 1, 0, 0);
 			AggregateCounter counts = this.aggregateCounterRepository.getCounts(AGGREGATE_COUNTER_NAME, 5, endDate,
 					AggregateCounterResolution.year);
-			assertThat(counts.getCounts(), equalTo(new long[] {0, 0, 1, 0, 0}));
+			assertThat(counts.getCounts(), equalTo(new long[] { 0, 0, 1, 0, 0 }));
 		}
+
 	}
 
-	@SpringBootTest({"aggregate-counter.name="+ AGGREGATE_COUNTER_NAME, "aggregate-counter.incrementExpression=payload"})
+	@TestPropertySource(properties = {
+			"aggregate-counter.name=" + AGGREGATE_COUNTER_NAME,
+			"aggregate-counter.incrementExpression=payload" })
 	public static class CountWithCustomIncrementTests extends AggregateCounterTests {
 
 		@Test
@@ -106,11 +114,12 @@ public abstract class AggregateCounterTests {
 			this.sink.input().send(new GenericMessage<Object>("43"));
 			AggregateCounter counts = this.aggregateCounterRepository.getCounts(AGGREGATE_COUNTER_NAME, 5,
 					AggregateCounterResolution.hour);
-			assertThat(counts.getCounts(), equalTo(new long[] {0, 0, 0, 0, 43}));
+			assertThat(counts.getCounts(), equalTo(new long[] { 0, 0, 0, 0, 43 }));
 		}
+
 	}
 
-	@SpringBootTest({"aggregate-counter.nameExpression=payload.counterName"})
+	@TestPropertySource(properties = "aggregate-counter.nameExpression=payload.counterName" )
 	public static class CountWithNameExpressionTests extends AggregateCounterTests {
 
 		@Test
@@ -119,11 +128,12 @@ public abstract class AggregateCounterTests {
 					Collections.singletonMap("counterName", AGGREGATE_COUNTER_NAME)));
 			AggregateCounter counts = this.aggregateCounterRepository.getCounts(AGGREGATE_COUNTER_NAME, 5,
 					AggregateCounterResolution.hour);
-			assertThat(counts.getCounts(), equalTo(new long[] {0, 0, 0, 0, 1}));
+			assertThat(counts.getCounts(), equalTo(new long[] { 0, 0, 0, 0, 1 }));
 		}
+
 	}
 
-	@SpringBootTest({"aggregate-counter.nameExpression=payload.counterName"})
+	@TestPropertySource(properties = "aggregate-counter.nameExpression=payload.counterName" )
 	public static class CounterListTest extends AggregateCounterTests {
 
 		@Test
@@ -134,5 +144,7 @@ public abstract class AggregateCounterTests {
 					Collections.singletonMap("counterName", AGGREGATE_COUNTER_NAME_2)));
 			assertThat(this.aggregateCounterRepository.list(), hasItems(AGGREGATE_COUNTER_NAME, AGGREGATE_COUNTER_NAME_2));
 		}
+
 	}
+
 }
