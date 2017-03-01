@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.springframework.cloud.stream.app</groupId> 
     <artifactId>aggregate-counter-app-dependencies</artifactId>
-    <version>1.2.0.M1</version>
+    <version>1.2.0.BUILD-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>aggregate-counter-app-dependencies</name>
     <description>Spring Cloud Stream Aggregate Counter App Dependencies</description>
@@ -24,12 +24,12 @@
             <dependency>
                 <groupId>org.springframework.cloud.stream.app</groupId>
                 <artifactId>spring-cloud-starter-stream-sink-aggregate-counter</artifactId>
-                <version>1.2.0.M1</version>
+                <version>1.2.0.BUILD-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud.stream.app</groupId>
                 <artifactId>aggregate-counter-app-starters-test-support</artifactId>
-                <version>1.2.0.M1</version>
+                <version>1.2.0.BUILD-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.analytics</groupId>
