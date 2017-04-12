@@ -25,6 +25,7 @@ import org.springframework.cloud.stream.app.time.DateFormat;
 import org.springframework.expression.Expression;
 import org.springframework.expression.common.LiteralExpression;
 import org.springframework.integration.expression.ValueExpression;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
@@ -33,6 +34,7 @@ import javax.validation.constraints.NotNull;
  * @author Ilayaperumal Gopinathan
  */
 @ConfigurationProperties("aggregate-counter")
+@Validated
 public class AggregateCounterSinkProperties {
 
 	/**
