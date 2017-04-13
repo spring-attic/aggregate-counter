@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>aggregate-counter-app-starters-build</artifactId>
 	<packaging>pom</packaging>
-	<version>1.2.0.RELEASE</version>
+	<version>1.2.1.BUILD-SNAPSHOT</version>
 	<parent>
 		<groupId>org.springframework.cloud.stream.app</groupId>
 		<artifactId>app-starters-build</artifactId>
-		<version>1.2.0.RELEASE</version>
+		<version>1.2.1.BUILD-SNAPSHOT</version>
 		<relativePath/>
 	</parent>
 
@@ -22,7 +22,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud.stream.app</groupId>
 				<artifactId>aggregate-counter-app-dependencies</artifactId>
-				<version>1.2.0.RELEASE</version>
+				<version>1.2.1.BUILD-SNAPSHOT</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
