@@ -4,6 +4,20 @@
 The aggregate counter differs from a simple counter in that it not only keeps a total value for the count, but also retains the total count values for each minute, hour day and month of the period for which it is run.
 The data can then be queried by supplying a start and end date and the resolution at which the data should be returned.
 
+== Input
+
+=== Headers
+
+N/A
+
+=== Payload
+
+* Any
+
+== Output
+
+N/A
+
 == Options
 
 The **$$aggregate-counter$$** $$sink$$ has the following options:
@@ -28,5 +42,20 @@ $$spring.redis.url$$:: $$Redis url, which will overrule host, port and password 
 == Build
 
 ```
-$ mvn clean package
+$ ./mvnw clean install -PgenerateApps
+$ cd apps
+```
+
+You can find the corresponding binder based projects here. You can then cd into one one of the folders and build it:
+
+```
+$ ./mvnw clean package
+```
+
+== Examples
+
+```
+java -jar aggregate-counter-sink.jar --name=<name of the counter>
+
+java -jar aggregate-counter-sink.jar --nameExpression=<name expression>
 ```
